@@ -1,0 +1,9 @@
+.idea
+vendor
+kucoin_market
+.env.local
+__pycache__
+go.sum
+kucoin-market-for-linux
+kucoin-market-for-mac
+kucoin-market-for-windows.exe
