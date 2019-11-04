@@ -1,9 +1,9 @@
 # Kucoin Level3 market
 
-## guide
-  [中文文档](README_CN.md)
+## 入门文档
+  [英文文档](README.md)
 
-## Installation
+## 安装
 
 1. install dependencies
 
@@ -20,11 +20,11 @@ go get github.com/shopspring/decimal
 
 ```
 CGO_ENABLED=0 go build -ldflags '-s -w' -o kucoin_market kucoin_market.go
-```
+``` 
 
-or you can download the latest available [release](https://github.com/Kucoin/kucoin-level3-sdk/releases)
+或者直接下载已经编译完成的二进制文件
 
-## Usage
+## 用法
 
 1. [vim .env](.env):
     ```
@@ -46,28 +46,11 @@ or you can download the latest available [release](https://github.com/Kucoin/kuc
     REDIS_DB=
     ```
 
-1. Run Command：
+1. 运行命令：
 
     ```
     ./kucoin_market -c .env -symbol BTC-USDT -p 9090 -rpckey BTC-USDT
     ```
-    
-
-## Docker Usage
-
-1. Build docker image
-
-   ```
-   docker build -t kucoin_market .
-   ```
-
-1. [vim .env](.env)
-
-1. Run
-
-  ```
-  docker run --rm -it -v $(pwd)/.env:/app/.env --net=host kucoin_market
-  ```
 
 ## RPC Method
 
@@ -97,9 +80,9 @@ see:[python jsonrpc client demo](./demo/python-demo/level3/rpc.py)
     ```
 ## Python-Demo
 
-> the demo including orderbook display
-
+> python的demo包含了一个本地orderbook的展示
 see:[python use_level3 demo](./demo/python-demo/order_book_demo.py)
+
 - Run order_book.py
     ```
     command: python order_book.py
