@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/Kucoin/kucoin-go-sdk"
 	"sync"
 
 	"github.com/JetBlink/orderbook/base"
 	"github.com/JetBlink/orderbook/level3"
+	"github.com/Kucoin/kucoin-go-sdk"
 	"github.com/Kucoin/kucoin-level3-sdk/helper"
 	"github.com/Kucoin/kucoin-level3-sdk/level3stream"
 	"github.com/Kucoin/kucoin-level3-sdk/utils/log"
@@ -34,7 +34,7 @@ func NewBuilder(apiService *kucoin.ApiService, symbol string) *Builder {
 		apiService: apiService,
 		symbol:     symbol,
 		lock:       &sync.RWMutex{},
-		Messages:   make(chan json.RawMessage, helper.MaxMsgChanLen),
+		Messages:   make(chan json.RawMessage, helper.MaxMsgChanLen*1024),
 	}
 }
 
@@ -45,12 +45,12 @@ func (b *Builder) resetOrderBook() {
 }
 
 func (b *Builder) ReloadOrderBook() {
-	defer func() {
-		if r := recover(); r != nil {
-			log.Error("ReloadOrderBook panic : %v", r)
-			b.ReloadOrderBook()
-		}
-	}()
+	//defer func() {
+	//	if r := recover(); r != nil {
+	//		log.Error("ReloadOrderBook panic : %v", r)
+	//		b.ReloadOrderBook()
+	//	}
+	//}()
 
 	log.Warn("start running ReloadOrderBook, symbol: %s", b.symbol)
 	b.resetOrderBook()
@@ -69,7 +69,7 @@ func (b *Builder) ReloadOrderBook() {
 func (b *Builder) playback() {
 	log.Warn("prepare playback...")
 
-	const tempMsgChanMaxLen = 200
+	const tempMsgChanMaxLen = 10240
 	tempMsgChan := make(chan *level3stream.StreamDataModel, tempMsgChanMaxLen)
 	firstSequence := ""
 	var fullOrderBook *DepthResponse
@@ -92,13 +92,18 @@ func (b *Builder) playback() {
 				log.Warn("start getting full level3 order book data, symbol: %s", b.symbol)
 				fullOrderBook, err = b.GetAtomicFullOrderBook()
 				if err != nil {
+					panic(err)
 					continue
 				}
-				log.Error("got full level3 order book data, Sequence: %d", fullOrderBook.Sequence)
+				log.Error("got full level3 order book data, Sequence: %s", fullOrderBook.Sequence)
+			}
+
+			if len(tempMsgChan) > tempMsgChanMaxLen-5 {
+				panic("playback failed, tempMsgChan is too long, retry...")
 			}
 
 			if fullOrderBook != nil && fullOrderBook.Sequence < firstSequence {
-				log.Error("full data Sequence %d is too small", fullOrderBook.Sequence)
+				log.Error("full data Sequence %s is too small", fullOrderBook.Sequence)
 				fullOrderBook = nil
 				continue
 			}
@@ -117,10 +122,6 @@ func (b *Builder) playback() {
 
 				log.Warn("finish playback.")
 				break
-			}
-
-			if len(tempMsgChan) > tempMsgChanMaxLen-5 {
-				panic("playback failed, tempMsgChan is too long, retry...")
 			}
 		}
 	}
