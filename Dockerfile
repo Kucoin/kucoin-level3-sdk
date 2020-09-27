@@ -7,7 +7,7 @@ RUN export GO111MODULE=on \
 COPY . /go/src/github.com/Kucoin/kucoin-level3-sdk
 
 RUN cd /go/src/github.com/Kucoin/kucoin-level3-sdk \
-    && CGO_ENABLED=0 go build -ldflags '-s -w' -o /go/bin/kucoin_market kucoin_market.go
+    && CGO_ENABLED=0 go build -ldflags '-s -w' -o /go/bin/kucoin_market cmd/main/market.go
 
 FROM debian:stretch
 
@@ -22,7 +22,4 @@ VOLUME /app
 
 EXPOSE 9090
 
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD ["kucoin_market", "-c", "/app/.env", "-symbol", "BTC-USDT", "-p", "9090", "-rpckey", "BTC-USDT"]
+CMD ["kucoin_market", "start", "-c", "config.yaml"]

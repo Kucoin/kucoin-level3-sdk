@@ -49,12 +49,12 @@ class RPC(object):
         if response.get('error') is not None:
             raise Exception(response.get('error'))
 
-        result = json.loads(response.get('result'))
+        result = response.get('result')
 
         if result['code'] != '0':
             raise Exception("rpc execute fail: %s" % result['error'])
 
-        return result
+        return result['data']
 
     def close(self):
         """
@@ -81,25 +81,12 @@ class RPC(object):
 
         return self.execute(data)
 
-    def get_ticker(self, number):
-        result = self.call("GetPartOrderBook", number=number)
-        ticker = json.loads(result['data'])
-        if ticker['sequence'] == 0:
-            raise Exception("rpc get ticker fail: sequence is null")
-        return ticker
+    def get_order_book(self, number):
+        order_book = self.call("GetOrderBook", number=number)
+        if len(order_book['asks']) == 0 or len(order_book['bids']) == 0:
+            raise Exception("empty order book")
 
-    def get_all_ticker(self):
-        result = self.call("GetOrderBook")
-        ticker = json.loads(result['data'])
-        if ticker['sequence'] == 0:
-            raise Exception("rpc get all ticker fail: sequence is null")
-        return ticker
-
-    def add_event_order_id(self, data, channel):
-        args = {}
-        for i in data:
-            args[i] = [channel]
-        return self.call("AddEventOrderIdsToChannels", data=args)
+        return order_book
 
     def add_event_client_id(self, data, channel):
         args = {}

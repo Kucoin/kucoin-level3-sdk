@@ -1,0 +1,24 @@
+app_debug: true
+
+symbol: KCS-USDT
+#symbol: XBTUSDM
+
+app:
+  name: market
+  log_file: "./runtime/log/market.log"
+
+market.kucoin_v2:
+  url: "https://api.kucoin.com"
+  type: "spot"
+  # url: "https://api-futures.kucoin.com"
+  # type: "future"
+
+api_server:
+  network: tcp
+  address: 0.0.0.0:9090
+  token: your-rpc-token
+
+redis:
+  addr: 127.0.0.1:6379
+  password: ""
+  db: 0
