@@ -278,7 +278,7 @@ func (b *Builder) updateOrderBook(msg *stream.DataModel) {
 		b.OrderBookTime = data.Time
 
 	default:
-		log.Panic("错误的 msg type: " + msg.Type)
+		log.Panic("error msg type: " + msg.Type)
 	}
 
 	ask, bid := b.fullOrderBook.GetOrderBookTickerOrder()

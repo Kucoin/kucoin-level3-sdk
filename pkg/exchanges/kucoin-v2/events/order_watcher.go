@@ -93,7 +93,7 @@ func (w *OrderWatcher) Run() {
 			w.publish(data.OrderId, publishedData)
 
 		default:
-			log.Panic("错误的 msg type: " + l3Data.Type)
+			log.Panic("error msg type: " + l3Data.Type)
 		}
 	}
 }
