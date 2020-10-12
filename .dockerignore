@@ -8,3 +8,7 @@ kucoin-market-for-linux
 kucoin-market-for-mac
 kucoin-market-for-windows.exe
 kucoin_market
+
+runtime/*
+
+demo/*
