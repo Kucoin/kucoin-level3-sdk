@@ -1,5 +1,7 @@
 # Kucoin Level3 Market
 
+Kucoin Level3 Market 支持现货和合约的level3消息。
+
 ## 文档
   [English Document](README.md)
 
@@ -41,7 +43,7 @@ CGO_ENABLED=0 go build -ldflags '-s -w' -o kucoin_market cmd/main/market.go
       addr: 127.0.0.1:6379
       password: ""
       db: 0
-    ```
+   ```
 
 1. 运行命令：
 
@@ -83,7 +85,7 @@ CGO_ENABLED=0 go build -ldflags '-s -w' -o kucoin_market cmd/main/market.go
       addr: 127.0.0.1:6379
       password: ""
       db: 0
-    ```
+   ```
    
 1. 运行
 

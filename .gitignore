@@ -1,5 +1,6 @@
 .idea
 vendor
+__pycache__
 
 config*.yaml
 !config.example.yaml
