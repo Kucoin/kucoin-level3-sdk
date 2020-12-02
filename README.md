@@ -1,5 +1,7 @@
 # Kucoin Level3 Market
 
+Kucoin Level3 Market supports both spot and futures.
+
 ## Guide
   [中文文档](README_CN.md)
 
@@ -41,7 +43,7 @@ or you can download the latest available [release](https://github.com/Kucoin/kuc
       addr: 127.0.0.1:6379
       password: ""
       db: 0
-    ```
+   ```
 
 1. Run Command：
 
