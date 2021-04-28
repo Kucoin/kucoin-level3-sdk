@@ -12,6 +12,9 @@ market.kucoin_v2:
   type: "spot"
   # url: "https://api-futures.kucoin.com"
   # type: "future"
+  key: ""
+  secret: ""
+  passphrase: ""
 
 api_server:
   network: tcp

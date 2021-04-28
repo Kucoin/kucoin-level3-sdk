@@ -38,6 +38,9 @@ or you can download the latest available [release](https://github.com/Kucoin/kuc
       type: "spot"
       # url: "https://api-futures.kucoin.com"
       # type: "future"
+      key: ""
+      secret: ""
+      passphrase: ""
    
     redis:
       addr: 127.0.0.1:6379
@@ -80,6 +83,9 @@ or you can download the latest available [release](https://github.com/Kucoin/kuc
       type: "spot"
       # url: "https://api-futures.kucoin.com"
       # type: "future"
+      key: ""
+      secret: ""
+      passphrase: ""
 
     redis:
       addr: 127.0.0.1:6379

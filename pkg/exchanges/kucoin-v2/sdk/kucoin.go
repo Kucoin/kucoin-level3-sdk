@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	urlSpotSnapshot = "/api/v2/market/orderbook/level3"
+	urlSpotSnapshot = "/api/v3/market/orderbook/level3"
 
 	urlFuturesSnapshot = "/api/v2/level3/snapshot"
 
