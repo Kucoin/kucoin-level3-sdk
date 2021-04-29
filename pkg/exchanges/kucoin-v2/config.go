@@ -5,6 +5,9 @@ type Config struct {
 	Type string `mapstructure:"type" validate:"required"`
 	//Verify           bool   `mapstructure:"verify"`
 	//VerifyDir        string `mapstructure:"verify_dir" validate:"required_with=Verify"`
+	Key        string `mapstructure:"key" validate:"required"`
+	Secret     string `mapstructure:"secret" validate:"required"`
+	Passphrase string `mapstructure:"passphrase" validate:"required"`
 }
 
 var defaultConfig = Config{}

@@ -38,6 +38,9 @@ CGO_ENABLED=0 go build -ldflags '-s -w' -o kucoin_market cmd/main/market.go
       type: "spot"
       # url: "https://api-futures.kucoin.com"
       # type: "future"
+      key: ""
+      secret: ""
+      passphrase: ""
    
     redis:
       addr: 127.0.0.1:6379
@@ -80,6 +83,9 @@ CGO_ENABLED=0 go build -ldflags '-s -w' -o kucoin_market cmd/main/market.go
       type: "spot"
       # url: "https://api-futures.kucoin.com"
       # type: "future"
+      key: ""
+      secret: ""
+      passphrase: ""
    
     redis:
       addr: 127.0.0.1:6379

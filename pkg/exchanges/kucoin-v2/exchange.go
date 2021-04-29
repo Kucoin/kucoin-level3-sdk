@@ -26,7 +26,15 @@ type Exchange struct {
 }
 
 func newExchange() *Exchange {
-	apiService := sdk.NewKucoin(defaultConfig.URL, defaultConfig.Type, "", "", "", false, 30*time.Second)
+	apiService := sdk.NewKucoin(
+		defaultConfig.URL,
+		defaultConfig.Type,
+		defaultConfig.Key,
+		defaultConfig.Secret,
+		defaultConfig.Passphrase,
+		false,
+		30*time.Second,
+	)
 
 	build := orderbook.NewBuilder(apiService, cfg.AppConfig.Symbol)
 	var verifyObj *verify.Verify
